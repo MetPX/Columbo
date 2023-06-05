@@ -21,6 +21,8 @@ named COPYING in the root of the source directory tree.
 
 import cgi
 import cgitb; cgitb.enable()
+print "Content-type: text/html"
+print 
 import commands
 import re
 import sys
@@ -59,8 +61,6 @@ def whichWay(str):
     elif str == 'rxq':
         return 'rx'
 
-print "Content-Type: text/html"
-print
 print """
 <html>
     <head>

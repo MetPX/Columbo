@@ -45,7 +45,7 @@ class NCSManager(Manager):
         
         for toggled in toggledFiles:
             name = toggled[0]
-            commandRegex = re.compile(r"python /apps/px/bin/%s %s " % (dir, name))
+            commandRegex = re.compile(r"python /usr/bin/%s %s " % (dir, name))
             psResult = commandRegex.search(ps)
             
             # Is the process running?
@@ -61,6 +61,9 @@ class NCSManager(Manager):
                 configFile = TXETC + '/' + toggled[1]
             elif dir == 'pxTransceiver':
                 configFile = TRXETC + '/' + toggled[1]
+            elif dir == 'pxFilter':
+                configFile = FXETC + '/' + toggled[1]
+
             
             # Get usefull information from the config file
             (type, port) = NCSUtils.configParse(configFile)
@@ -74,6 +77,12 @@ class NCSManager(Manager):
             # Get the last reception or transmission
             if dir == 'pxReceiver':
                 log = PXLOG + '/' + 'rx_' + name + '.log'
+                #regex = r"\[INFO\] ingest"
+                regex = r"Ingested in DB"
+                lastRcv = NCSUtils.lastSendRcv(log, regex)
+                lastTrans = time.gmtime(0) # Default value
+            elif dir == 'pxFilter':
+                log = PXLOG + '/' + 'fx_' + name + '.log'
                 #regex = r"\[INFO\] ingest"
                 regex = r"Ingested in DB"
                 lastRcv = NCSUtils.lastSendRcv(log, regex)
@@ -98,9 +107,11 @@ class NCSManager(Manager):
             # Creating the circuit
             circuit = NCSCircuit(self.machine, name, status, configFile, log, sock, type, lastRcv, lastTrans)
             # The finishing touches: queue + log line
-            if dir == 'pxReceiver':
+            if dir == 'pxReceiver' or dir == 'pxFilter':
                 if type.lower().find('file') != -1:
                     circuit.setQueue(NCSUtils.queueLength(RXQ + '/' + name))
+                elif type.lower().find('filter') != -1:
+                    circuit.setQueue(NCSUtils.queueLength(FXQ + '/' + name))
                 else:
                     circuit.setQueue(-1)
             elif dir in ['pxSender', 'pxTransceiver']:
@@ -119,6 +130,7 @@ class NCSManager(Manager):
             
     def makeCircuitDict(self):
         rxFiles = os.listdir(RXETC)
+        fxFiles = os.listdir(FXETC)
         txFiles = os.listdir(TXETC)
         trxFiles = os.listdir(TRXETC)
              
@@ -135,6 +147,7 @@ class NCSManager(Manager):
         """
         nsInfo = commands.getoutput('netstat -an').splitlines()
         self.getData(rxFiles, 'pxReceiver', procList, nsInfo)
+        self.getData(fxFiles, 'pxFilter', procList, nsInfo)
         self.getData(txFiles, 'pxSender', procList, nsInfo)
         self.getData(trxFiles, 'pxTransceiver', procList, nsInfo)
         

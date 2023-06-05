@@ -180,6 +180,9 @@ def errorCheck(logger, logname, wamsLog, circuitDict):
         if circuit.getGlobalType().find('pxReceiver') != -1:
             rcv = tooLong(circuit.getGlobalLastRcv(), int(timerMax[key]))
             trans = 0
+        elif circuit.getGlobalType().find('pxFilter') != -1:
+            rcv = tooLong(circuit.getGlobalLastRcv(), int(timerMax[key]))
+            trans = 0
         elif circuit.getGlobalType().find('pxSender') != -1:
             trans = tooLong(circuit.getGlobalLastTrans(), int(timerMax[key]))
             rcv = 0

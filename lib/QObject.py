@@ -20,6 +20,8 @@ named COPYING in the root of the source directory tree.
 
 import cgi
 import cgitb; cgitb.enable()
+#print "Content-type: text/html"
+#print 
 
 import sys, commands, pickle, re, os
 sys.path.append(sys.path[0] + "/../../lib");

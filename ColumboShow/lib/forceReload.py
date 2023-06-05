@@ -18,6 +18,9 @@ named COPYING in the root of the source directory tree.
 #############################################################################################
 import cgi
 import cgitb; cgitb.enable()
+# RS - I don't think this is needed here
+#print "Content-type: text/html"
+#print 
 import sys, commands
 
 sys.path.append(sys.path[0] + "/../../lib");

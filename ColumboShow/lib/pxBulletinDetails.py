@@ -20,6 +20,8 @@ named COPYING in the root of the source directory tree.
 
 import cgi
 import cgitb; cgitb.enable()
+print "Content-type: text/html"
+print 
 import sys, pwd, time, re, commands
 sys.path.append(sys.path[0] + "/../../lib")
 sys.path.append("../../lib")
@@ -60,8 +62,6 @@ def readFromDB(file, host):
     else:
         return ''
 
-print "Content-Type: text/html"
-print
  
 print """<html>
 <head>

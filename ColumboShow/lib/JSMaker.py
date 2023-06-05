@@ -75,6 +75,9 @@ class JSMaker:
         if circuit.getGlobalType().find('pxReceiver') != -1:
             rcv = self.tooLong(circuit.getGlobalLastRcv(), int(self.timerMax[key]))
             trans = 0
+        elif circuit.getGlobalType().find('pxFilter') != -1:
+            rcv = self.tooLong(circuit.getGlobalLastRcv(), int(self.timerMax[key]))
+            trans = 0
         elif circuit.getGlobalType().find('pxSender') != -1:
             trans = self.tooLong(circuit.getGlobalLastTrans(), int(self.timerMax[key]))
             rcv = 0

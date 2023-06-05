@@ -43,7 +43,7 @@ def configParse(file):
             if field in ['port', 'portS']:
                 port = value
             if field == 'destination':
-                if value.find('ftp://') == -1:
+                if value.find('ftp://') == -1 and value.find('file://') == -1:
                     port = value.split(':')[-1]
                 else:
                     port = 0

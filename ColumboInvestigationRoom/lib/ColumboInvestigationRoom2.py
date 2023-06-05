@@ -141,6 +141,7 @@ for machine in machines:
    print "************************************************ " + machine + " *****************************************"
    # Start the CCS Program on each PDS. After that you should have access to "clues" files
    command =  "ssh " + machine + " " + PYTHON2 + " " + CCS_PROG + " %s %s %s %s %s %s %s" % (system, clues_name, ccs_logname, ccs_log_level, ccs_copying, ccs_user, ccs_host)
+   print command
    (status, output) = commands.getstatusoutput(command)
    print output
    if not status:

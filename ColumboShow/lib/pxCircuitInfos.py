@@ -21,6 +21,8 @@ named COPYING in the root of the source directory tree.
 
 import cgi
 import cgitb; cgitb.enable()
+print "Content-type: text/html"
+print 
 import sys, os, pwd, time, re, pickle, commands
 sys.path.append(sys.path[0] + "/../../lib");
 sys.path.append("../../lib")
@@ -76,8 +78,6 @@ machines = circuitDict[circuitName].getHosts()
 # 2) Present (HTML) the last log on each PDS
 #############################################################################################
 
-print "Content-Type: text/html"
-print
  
 print """<html>
 <head>
@@ -164,6 +164,8 @@ type = circuit.getGlobalType().split(' ')[0] # Just pxSender or pxReceiver
 # Usual stuff
 if type == 'pxReceiver':
     directory = 'rx'
+elif type == 'pxFilter':
+    directory = 'fx'
 elif type == 'pxSender':
     directory = 'tx'
 elif type == 'pxTransceiver':
@@ -171,8 +173,8 @@ elif type == 'pxTransceiver':
 else:
     raise ValueError
 
-path = '/apps/px/etc/%s/%s.conf' % (directory, circuitName)
-status, output = commands.getstatusoutput('sudo -u pds /usr/bin/ssh %s cat %s' % (machines[0], path))
+path = '/etc/px/%s/%s.conf' % (directory, circuitName)
+status, output = commands.getstatusoutput('sudo -u px /usr/bin/ssh %s cat %s' % (machines[0], path))
 if not status:
     result = output
 else:

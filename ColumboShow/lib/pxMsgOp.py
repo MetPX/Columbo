@@ -20,6 +20,8 @@ named COPYING in the root of the source directory tree.
 
 import cgi
 import cgitb; cgitb.enable()
+print "Content-type: text/html"
+print 
 import sys, os, pwd, time, re, pickle, commands
 sys.path.append(sys.path[0] + "/../../lib");
 sys.path.append("../../lib")
@@ -41,8 +43,6 @@ action_logname = config.get('LOG', 'action_log')
 logger = Logger(action_logname, "INFO", "AL")
 logger = logger.getLogger()
 
-print "Content-Type: text/html"
-print
  
 print """<html>
 <head>

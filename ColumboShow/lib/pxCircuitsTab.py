@@ -21,6 +21,8 @@ named COPYING in the root of the source directory tree.
 
 import cgi
 import cgitb; cgitb.enable()
+print "Content-type: text/html"
+print 
 import sys, os, pwd, time, re, pickle, commands
 sys.path.append(sys.path[0] + "/../../lib");
 sys.path.append("../../lib")
@@ -78,9 +80,6 @@ def printHeader():
 """
 
 template.initStates()
-
-print "Content-Type: text/html"
-print
 
 printHeader()
 
@@ -141,9 +140,9 @@ print """</td>
 </table>
 </center>
 
-<iframe src="pxCircuitsTable.py?host=backends" name="backends" width=100% height=58%></iframe>
+<iframe src="pxCircuitsTable.py?host=backends" name="backends" width=100% height=44%></iframe>
 <br>
-<iframe src="pxCircuitsTable.py?host=frontend" name="frontend" width=100% height=30%></iframe>
+<iframe src="pxCircuitsTable.py?host=frontend" name="frontend" width=100% height=44%></iframe>
 """
 
 print "</body>"

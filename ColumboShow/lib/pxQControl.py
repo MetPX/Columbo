@@ -21,6 +21,8 @@ named COPYING in the root of the source directory tree.
 
 import cgi
 import cgitb; cgitb.enable()
+print "Content-type: text/html"
+print 
 import sys, os, pwd, time, re, pickle, commands
 sys.path.append(sys.path[0] + "/../../lib");
 sys.path.append("../../lib")
@@ -39,8 +41,6 @@ circuitName = form["circuit"].value
 direction = form["direction"].value
 host = form["host"].value
 
-print "Content-Type: text/html"
-print
  
 print """<html>
 <head>
@@ -88,6 +88,9 @@ if direction.find('tx') != -1 or direction.find('pxSender') != -1:
 elif direction.find('rx') != -1 or direction.find('pxReceiver') != -1:
     direction = 'rx'
     directory = RXQ + '/' + circuitName
+elif direction.find('fx') != -1 or direction.find('pxFilter') != -1:
+    direction = 'fx'
+    directory = FXQ + '/' + circuitName
 else:
     raise InvalidDirection
     

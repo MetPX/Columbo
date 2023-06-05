@@ -36,12 +36,14 @@ CLIENTHOME = ROOT + "/home"
 # Useful directorties for PX
 PXROOT = "/apps/px"
 PXETC = PXROOT + "/etc"
+FXETC = PXETC + "/fx"
 RXETC = PXETC + "/rx"
 TXETC = PXETC + "/tx"
 TRXETC = PXETC + "/trx"
 PXLOG = PXROOT + "/log"
 RXQ = PXROOT + "/rxq"
 TXQ = PXROOT + "/txq"
+FXQ = PXROOT + "/fxq"
 
 # Useful files
 PROD = "pdschkprod.conf"

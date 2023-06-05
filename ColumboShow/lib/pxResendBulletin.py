@@ -20,6 +20,8 @@ named COPYING in the root of the source directory tree.
 
 import cgi
 import cgitb; cgitb.enable()
+print "Content-type: text/html"
+print 
 import sys, os, commands
 
 sys.path.append("/apps/px/lib")
@@ -40,8 +42,6 @@ def showAlert(msg):
 
 form = cgi.FieldStorage()
 
-print "Content-Type: text/html"
-print
  
 print """
 <html>

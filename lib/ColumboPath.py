@@ -18,7 +18,7 @@ named COPYING in the root of the source directory tree.
 
 """
 # Useful directories
-COLUMBO_HOME = "/apps/pds/tools/Columbo"                   # This line must be set correctly for any new installation
+COLUMBO_HOME = "/apps/pds/tools/Columbo"                          # This line must be set correctly for any new installation
 CCS = COLUMBO_HOME + "/ColumboCrimeScene"                  # Each node is a "crime scene" where clues are gathered
 CIR = COLUMBO_HOME + "/ColumboInvestigationRoom"           # Here, conclusions are draw (from all the amassed clues)
 CS =  COLUMBO_HOME + "/ColumboShow"                        # Presentation of results occur here
